@@ -1,0 +1,650 @@
+#editor {
+  width: 100%;
+  min-height: 100vh;
+
+  .el-input__inner {
+    border-radius: 0;
+  }
+
+  .el-select {
+    width: 100%;
+  }
+
+  input {
+    height: 40px;
+    line-height: 40px;
+    background: #fff;
+    box-shadow: none;
+    padding: 0 15px;
+    overflow: hidden;
+    border-radius: 0;
+    white-space: nowrap;
+  }
+
+  textarea {
+    height: 40px;
+    line-height: 20px;
+    background: #fff;
+    box-shadow: none;
+    padding: 9px 15px;
+    border-radius: 0;
+  }
+}
+
+#actionbar {
+  height: 56px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(49, 70, 102, 0.1);
+  position: relative;
+  z-index: 9;
+
+  .description {
+    display: flex;
+    align-items: center;
+
+    i {
+      font-size: 24px;
+      margin-right: 16px;
+      cursor: pointer;
+      color: #78808c;
+    }
+
+    p {
+      font-size: 14px;
+      color: #78808c;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-weight: 500;
+
+      span {
+        font-size: 12px;
+        display: block;
+        font-weight: normal;
+      }
+    }
+  }
+
+  .action {
+    display: flex;
+    align-items: center;
+
+    >a, >button {
+      margin: 0 16px 0 0;
+    }
+
+    .user {
+      width: 36px;
+      height: 36px;
+      font-size: 18px;
+      color: #fff;
+      border-radius: 50%;
+      background: rgb(254, 196, 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+#mainbox {
+  height: calc(100vh - 56px);
+  position: relative;
+  padding: 0 250px 0 200px;
+
+  .asidebox {
+    width: 200px;
+    height: 100%;
+    overflow-y: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    .componentsbox {
+      padding: 8px 0;
+
+      .components-cate {
+        padding: 10px 20px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #999;
+      }
+
+      ul {
+        position: relative;
+        overflow: hidden;
+        padding: 0 10px 10px 20px;
+        margin: 0;
+
+        li {
+          font-size: 12px;
+          display: block;
+          line-height: 40px;
+          position: relative;
+          left: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          color: #333;
+          border-bottom: 1px solid #eee;
+          background-color: #fff;
+
+          &:hover {
+            color: #7048ff;
+            background-color: #f6f4ff;
+          }
+
+          span {
+            display: flex;
+            cursor: move;
+            align-items: center;
+
+            i {
+              margin-right: 6px;
+              margin-left: 8px;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .attrbox {
+    width: 250px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    .attrbox-cate {
+      display: flex;
+
+      span {
+        height: 44px;
+        line-height: 44px;
+        border-bottom: 2px solid #e4e7ed;
+        flex: 1;
+        font-size: 14px;
+        font-weight: 600;
+        color: #999;
+        text-align: center;
+        cursor: pointer;
+
+        &.active {
+          color: #333;
+          border-color: #7048ff;
+        }
+      }
+    }
+
+    .config {
+      height: calc(100% - 44px);
+      overflow-y: auto;
+
+      .config-section {
+        padding: 20px;
+        overflow: hidden;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid #dcdfe6;
+        }
+      }
+
+      .config-cate {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        line-height: 16px;
+        margin-bottom: 40px;
+      }
+
+      .config-item {
+        margin-bottom: 24px;
+
+        .config-title {
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          p {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            flex: 1;
+
+            span {
+              color: #999;
+              font-weight: normal;
+            }
+          }
+        }
+
+        .config-content {
+          padding: 6px 0;
+
+          > *:not(:last-child) {
+            margin-bottom: 10px;
+          }
+        }
+
+        .config-options {
+          .options-add-button {
+            color: #7048ff;
+            display: inline-block;
+            cursor: pointer;
+          }
+
+          li {
+            display: flex;
+            align-items: center;
+            position: relative;
+
+            &:not(:last-child) {
+              margin-bottom: 10px;
+            }
+
+            &.ghost {
+              background: #fff;
+              border: 1px dashed #7048ff;
+
+              &::after {
+                background: #fff;
+                display: block;
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+              }
+            }
+
+            .options-delete-button, .options-drag-button {
+              font-size: 20px;
+              color: #bbb;
+              margin-left: 6px;
+              cursor: pointer;
+
+              &:hover {
+                color: #333;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .panelbox {
+    height: 100%;
+    padding: 20px 20px 40px;
+    background: #f8f9fd;
+    border-left: 1px solid rgba(0, 0, 0, 0.06);
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    overflow-y: auto;
+  }
+
+  .editorbox {
+    .slogan {
+      height: 105px;
+      line-height: 24px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      padding: 40px 0;
+      text-align: center;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .widgetbox {
+    position: relative;
+
+    .widget-empty-tip {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 300px;
+      background: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      pointer-events: none;
+
+      i {
+        font-size: 20px;
+        margin-right: 6px;
+      }
+    }
+
+    .widget-panel {
+      position: relative;
+      z-index: 1;
+
+      .widget-panel-inner {
+        min-height: 304px;
+      }
+
+      .widget-view {
+        position: relative;
+        background-color: #fff;
+        padding: 20px;
+        overflow: hidden;
+        min-height: 50px;
+
+        &:hover {
+          background: #ecf5ff;
+          border: 1px solid #7048ff;
+          padding: 19px;
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          z-index: 10;
+        }
+
+        &.active {
+          border: 3px solid #7048ff;
+          padding: 17px;
+        }
+
+        .label {
+          font-size: 16px;
+          line-height: 1.2;
+          padding-bottom: 16px;
+          color: #333;
+          font-weight: 600;
+          max-width: calc(100% - 120px);
+
+          a {
+            color: #2271b1;
+          }
+        }
+
+        ul {
+          li {
+            line-height: 30px;
+          }
+        }
+
+        &.required {
+          .label {
+            &:before {
+              content: '*';
+              color: #f00;
+            }
+          }
+        }
+
+        .el-form-item__label {
+          font-size: 16px;
+          font-weight: 600;
+          color: #333;
+          line-height: 16px;
+          padding-bottom: 15px;
+        }
+
+        .el-input {
+          line-height: 44px;
+
+          .el-input__inner {
+            height: 44px;
+            font-size: 14px;
+            font-weight: 400;
+            color: #ccc;
+            line-height: 44px;
+            border: 1px solid #dcdfe6;
+          }
+        }
+
+        .el-cascader-panel {
+          margin-top: 6px;
+          height: 120px;
+        }
+
+        .el-radio {
+          margin: 0;
+        }
+
+        .privacy {
+          line-height: normal;
+
+          .privacy-title {
+            a {
+              color: #2271b1;
+            }
+          }
+
+          .privacy-icon {
+            font-size: 24px;
+            color: #dd3d3d;
+            margin: 10px 0 0 -4px;
+          }
+
+          .privacy-name {
+            padding: 10px 0;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 1px solid #eee;
+          }
+
+          .privacy-content {
+            padding: 10px 0;
+          }
+
+          .privacy-tip {
+            font-size: 12px;
+            color: #dd3d3d;
+          }
+        }
+
+        .sms-code {
+          display: flex;
+          margin-top: 12px;
+
+          .el-input {
+            margin-right: 12px;
+          }
+        }
+      }
+
+      .ghost {
+        height: 0px;
+        overflow: hidden;
+        border: 3px solid #b60;
+      }
+
+      .widget-item {
+        position: relative;
+
+        .widget-action {
+          position: absolute;
+          right: 0;
+          top: 0;
+          z-index: 11;
+          width: 120px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          font-size: 16px;
+          color: #fff;
+          background: #7048ff;
+
+          i {
+            font-weight: 700;
+
+            &.widget-delete-button, &.widget-copy-button {
+              cursor: pointer;
+            }
+
+            &.widget-drag-button {
+              cursor: move;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.options-setting-panel {
+  height: 466px;
+  background: #f9f9f9;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  border-top: 1px solid #ddd;
+
+  .options-setting-box {
+    flex-shrink: 0;
+    flex: 1;
+    min-width: 240px;
+    height: 100%;
+    overflow-y: auto;
+    padding: 20px;
+    position: relative;
+
+    &:not(:last-child) {
+      padding-right: 30px;
+
+      &:after {
+        content: '';
+        width: 0;
+        height: 100%;
+        position: absolute;
+        right: 10px;
+        top: 0;
+        border-right: 1px solid #ddd;
+      }
+
+      &.active {
+        ul {
+          li {
+            &.active:after {
+              content: '';
+              width: 10px;
+              height: 10px;
+              background-color: #f9f9f9;
+              border: 1px solid transparent;
+              transform: translate3d(-50%, -50%, 0) rotate(45deg);
+              position: absolute;
+              border-top-color: #ddd;
+              border-right-color: #ddd;
+              right: -31px;
+              top: 17px;
+              z-index: 10;
+            }
+          }
+        }
+
+        &.force {
+          &:after {
+            border-color: #4b2281;
+          }
+
+          ul {
+            li {
+              &.active:after {
+                border-top-color: #4b2281;
+                border-right-color: #4b2281;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .options-setting-title {
+      font-weight: 600;
+      padding-bottom: 6px;
+      line-height: 26px;
+    }
+
+    .options-add-button {
+      color: #7048ff;
+      display: inline-block;
+      cursor: pointer;
+      margin-top: 7px;
+    }
+
+    ul {
+      li {
+        height: 34px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-right: 22px;
+
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+
+        &.ghost {
+          border: 1px dashed #7048ff;
+          overflow: hidden;
+
+          &::before {
+            background: #fff;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 11;
+          }
+        }
+
+        .options-setting-input {
+          flex: 1;
+        }
+
+        .options-delete-button, .options-drag-button {
+          font-size: 16px;
+          color: #bbb;
+          margin-left: 6px;
+          cursor: pointer;
+
+          &:hover {
+            color: #333;
+          }
+        }
+
+        .el-input__inner {
+          height: 32px;
+          line-height: 32px;
+          border-radius: 0;
+        }
+
+        &.active {
+          padding-right: 0;
+
+          .el-input__inner {
+            border-color: #4b2281;
+            background-color: rgba(112, 72, 255, 0.07);
+          }
+        }
+      }
+    }
+  }
+}
